@@ -5,14 +5,12 @@ import { getContacts, getFilter } from 'redux/selectors';
 import PropTypes from 'prop-types';
 
 
-const ContactList = () => {
+export const ContactList = () => {
     const contacts = useSelector(getContacts);
-    const { input } = useSelector(getFilter);
+    const filter = useSelector(getFilter);
 
-    if (!contacts) return null;
-
-    const filteredContacts = contacts.value.filter(contact =>
-        contact.name.toLowerCase().includes(input.toLowerCase())
+    const filteredContacts = contacts.filter(contact =>
+        contact.name.toLowerCase().includes(filter.toLowerCase()) !== -1
     );
 
     return (
@@ -26,7 +24,5 @@ const ContactList = () => {
 
 ContactList.propTypes = {
     contacts: PropTypes.object,
-    input: PropTypes.string,
+    filter: PropTypes.string,
 };
-
-export default ContactList;

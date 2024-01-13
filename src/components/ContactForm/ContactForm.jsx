@@ -4,23 +4,40 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contactSlice';
 import { getContacts } from 'redux/selectors';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
-const ContactForm = () => {
+export const ContactForm = () => {
+    const [data, setData] = useState({
+        name: '',
+        number: '',
+    });
+
     const dispatch = useDispatch();
     const contacts = useSelector(getContacts);
 
     const handleSubmit = evt => {
         evt.preventDefault();
-        const form = evt.target;
-        const name = form.elements.name.value;
-        const number = form.elements.number.value;
-        form.reset();
-        if (contacts.value.find(contact => contact.name === name)) {
-            Notiflix.Notify.info(`${name} is already in contacts`);
+        if (contacts.some(contact => contact.name === data.name)) {
+            Notiflix.Notify.info(`${data.name} is already in contacts`);
             return;
-        };
-        dispatch(addContact(name, number));
-    }
+        } else {
+            dispatch(addContact(data.name, data.number));
+        }
+    };
+
+    const handleChange = evt => {
+        const { name, value } = evt.target;
+        switch (name) {
+            case 'name':
+                setData(value);
+                break;
+            case 'number':
+                setData(value);
+                break;
+            default:
+                return;
+        }
+    };
 
     return (
         <form className={css.formcontact} onSubmit={handleSubmit} autoComplete='off'>
@@ -32,7 +49,9 @@ const ContactForm = () => {
                     className={css.inputform}
                     type="text"
                     name="name"
+                    value={data.name}
                     required
+                    onChange={handleChange}
                 />
             </label>
             <label >
@@ -43,10 +62,11 @@ const ContactForm = () => {
                     className={css.inputform}
                     type="tel"
                     name="number"
+                    value={data.number}
                     pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}"
                     title="The phone number in the form 000-00-00."
                     required
-
+                    onChange={handleChange}
                 />
             </label>
             <button className={css.button} type='submit'>Add contact</button>
@@ -58,4 +78,3 @@ ContactForm.propTypes = {
     contacts: PropTypes.object
 };
 
-export default ContactForm;
