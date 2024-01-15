@@ -7,21 +7,19 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 export const ContactForm = () => {
-    const [data, setData] = useState({
-        name: '',
-        number: '',
-    });
+    const [name, setName] = useState('');
+    const [number, setNumber] = useState('');
 
     const dispatch = useDispatch();
     const contacts = useSelector(getContacts);
 
     const handleSubmit = evt => {
         evt.preventDefault();
-        if (contacts.some(contact => contact.name === data.name)) {
-            Notiflix.Notify.info(`${data.name} is already in contacts`);
+        if (contacts.some(contact => contact.name === name)) {
+            Notiflix.Notify.info(`${name} is already in contacts`);
             return;
         } else {
-            dispatch(addContact(data.name, data.number));
+            dispatch(addContact(name, number));
         }
     };
 
@@ -29,10 +27,10 @@ export const ContactForm = () => {
         const { name, value } = evt.target;
         switch (name) {
             case 'name':
-                setData(value);
+                setName(value);
                 break;
             case 'number':
-                setData(value);
+                setNumber(value);
                 break;
             default:
                 return;
@@ -49,7 +47,7 @@ export const ContactForm = () => {
                     className={css.inputform}
                     type="text"
                     name="name"
-                    value={data.name}
+                    value={name}
                     required
                     onChange={handleChange}
                 />
@@ -62,7 +60,7 @@ export const ContactForm = () => {
                     className={css.inputform}
                     type="tel"
                     name="number"
-                    value={data.number}
+                    value={number}
                     pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}"
                     title="The phone number in the form 000-00-00."
                     required
