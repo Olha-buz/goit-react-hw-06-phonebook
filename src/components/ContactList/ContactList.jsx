@@ -1,7 +1,7 @@
 import ContactItem from 'components/ContactItem/ContactItem';
 import css from './ContactList.module.css';
 import { useSelector } from 'react-redux';
-import { getContacts, getFilter } from 'redux/selectors';
+import { getContacts, getFilter } from 'store/selectors';
 import PropTypes from 'prop-types';
 
 

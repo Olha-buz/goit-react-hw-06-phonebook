@@ -1,8 +1,8 @@
 import Notiflix from 'notiflix';
 import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contactSlice';
-import { getContacts } from 'redux/selectors';
+import { addContact } from 'store/contactSlice';
+import { getContacts } from 'store/selectors';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
