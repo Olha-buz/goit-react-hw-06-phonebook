@@ -12,7 +12,7 @@ export const ContactList = () => {
     const dispatch = useDispatch();
     
     
-    // console.log(contacts);
+    console.log(contacts);
     
     const filteredContacts = contacts.filter(contact =>
         contact.name.toLowerCase().includes(filter.toLowerCase())
@@ -21,7 +21,11 @@ export const ContactList = () => {
     // console.log(filteredContacts);
     // console.log(filter);
 
-    const handleDelete = (contact) => dispatch(deleteContact(contact.id));
+    const handleDelete = ((contact) => {
+        // console.log(contact);
+        dispatch(deleteContact(contact.id));
+
+    });
     return (
         <ul className={css.contacts}>
             {filteredContacts.map(contact => {

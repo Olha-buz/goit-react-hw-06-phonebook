@@ -21,6 +21,8 @@ export const ContactForm = () => {
         } else {
             dispatch(addContact(name, number));
         }
+        setName('');
+        setNumber('');
     };
 
     const handleChange = evt => {

@@ -26,19 +26,20 @@ const contactSlice = createSlice({
                 };
             }
         },
-        deleteContact: {
-            reducer(state, action) {
-                const index = state.findIndex(contact => contact.id === action.payload.id);
-                state.splice(index, 1);
+        deleteContact(state, action) {
+            console.log(state);
+            console.log(action.payload);
+            const index = state.findIndex(contact => contact.id === action.payload);
+            console.log(index);
+            state.splice(index, 1);
             },
-            prepare(id) {
-                return {
-                    payload: {
-                        id: id,
-                    }
-                }
-            }
-        },
+            // prepare(id) {
+            //     return {
+            //         payload: {
+            //             id: id,
+            //         }
+            //     }
+            // }
     }
 });
 
