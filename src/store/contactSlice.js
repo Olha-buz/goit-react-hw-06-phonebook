@@ -26,20 +26,16 @@ const contactSlice = createSlice({
                 };
             }
         },
-        deleteContact(state, action) {
+        deleteContact: (state, action) => {
             console.log(state);
             console.log(action.payload);
-            const index = state.findIndex(contact => contact.id === action.payload);
-            console.log(index);
-            state.splice(index, 1);
+            // const index = state.findIndex(contact => contact.id === action.payload);
+            // console.log(index);
+            // state.splice(index, 1);
+            const newArr = state.filter((contact) => contact.id !== action.payload);
+            console.log(newArr);
+            return newArr;
             },
-            // prepare(id) {
-            //     return {
-            //         payload: {
-            //             id: id,
-            //         }
-            //     }
-            // }
     }
 });
 
