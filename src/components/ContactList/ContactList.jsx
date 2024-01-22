@@ -36,7 +36,7 @@ export const ContactList = () => {
                             className={css.buttonremove}
                             type="button"
                             id={contact.name}
-                            onClick={handleDelete}>
+                            onClick={() => handleDelete(contact)}>
                             Delete
                         </button>
                     </li>
